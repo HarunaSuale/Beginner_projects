@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Subscribe Button
+        </title>
+        <link rel="stylesheet" href="button.css">
+    </head>
+    <body>
+        <div class="container">
+            <h1>Subscribe Button Project</h1>
+
+            <button class="js-button" onclick="changeText()">Subscribe</button>
+        </div>
+        <script>
+
+            function changeText(){
+                let buttonE = document.querySelector('.js-button');
+                if(buttonE.innerText === 'Subscribe'){
+                    buttonE.innerText = "Unsubscribe";
+                    buttonE.classList.add('is-subscribed');
+                }else {
+                    buttonE.innerText = "Subscribe";
+                    buttonE.classList.remove('is-subscribed');
+                }
+            }
+        </script>
+    </body>
+</html>

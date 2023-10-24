@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Todo list Project</title>
+        <link rel="stylesheet" href="Todo.css">
+    </head>
+    <body>
+        <div class="container">
+            <h1>To Do List App</h1>
+            <div class="input-section">
+                <input type="text" placeholder="type Todo Text" class="input js-inputText">
+                <input type="date" class="js-date">
+                <button class="botton js-add-button ">Add</button>
+            </div>
+            <div class="js-todo-list todo-list" >
+            </div>
+       </div>
+
+        <script>
+
+            const todoArray = [];
+
+             function getTodo(){
+                 const inputElement = document.querySelector('.js-inputText');
+                 const inputText = inputElement.value;
+                 
+                 const dateElement = document.querySelector('.js-date');
+                 const dueDate = dateElement.value;
+                              
+                 todoArray.push({inputText, dueDate});
+
+                 inputElement.value = '';
+                 dateElement.value = '';
+                 todoContent();
+               }   
+                
+               
+               function todoContent(){
+                let todoValues = '';
+
+                todoArray.forEach((value, index) => {
+                    const {inputText, dueDate} = value;
+                    let html = `
+                    <div>${inputText}</div>
+                    <div>${dueDate}</div>
+                    <button onclick ="
+                    todoArray.splice(${index}, 1);
+                    todoContent();
+                    " class="delet">Delete</button>
+                    `;
+
+                    todoValues += html;
+                });
+                
+                document.querySelector('.js-todo-list').innerHTML =  todoValues; 
+                }
+
+                const addElement = document.querySelector('.js-add-button');
+                 addElement.addEventListener('click', () => {
+                   
+                    setTimeout(() => {getTodo();}, 500);
+
+                });
+               
+            
+                
+                
+            </script>
+    </body>
+</html>

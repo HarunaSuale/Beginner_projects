@@ -1,0 +1,63 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: arial;
+}
+.container{
+    width: 100%;
+    height: 100vh;
+    padding: 20px 10%;
+    background: #f0f0f0;
+
+}
+.input-section{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+    
+}
+.input,
+.botton,
+.js-date
+ {
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: 300px;
+    outline: none;
+    border: 1px solid rgb(111, 111, 112);
+    border-radius: 4px;
+}
+.botton{
+    cursor: pointer;
+    background: green;
+    color: rgb(240, 224, 224);
+    
+}
+.todo-list{
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 245px 177px 70px;
+    row-gap: 10px;
+    align-items: center;
+    
+}
+.delet{
+    padding: 10px 12px;
+    background: rgb(187, 5, 5);
+    color: rgb(243, 227, 227);
+    outline: none;
+    box-shadow: none;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 4px;
+    border-width: 1px;
+    font-family: arial;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+.delet:hover{
+    background: rgb(243, 227, 227);
+    color: rgb(187, 5, 5);  
+}

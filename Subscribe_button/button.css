@@ -1,0 +1,35 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: arial;
+}
+.js-button{
+    margin: 10px 45px;
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: bold;
+    transition: background-color 0.15s;
+}
+.is-subscribed{
+    background-color: rgb(250, 246, 246);
+    color:rgb(17, 17, 16);
+    font-weight: bold;
+    font-size: 15px;
+
+}
+.container h1{
+    margin: 0 40px;
+    font-size: 20px;
+    margin-top: 20px;
+    color: rgb(17, 17, 16);
+
+
+}
+
+
