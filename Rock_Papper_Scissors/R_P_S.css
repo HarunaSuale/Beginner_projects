@@ -1,0 +1,45 @@
+*{
+    padding: 0;
+    margin: 0;  
+    box-sizing: border-box;
+    font-family: arial;
+    font-weight: bold;
+}
+.container{
+   background: rgb(99, 93, 93);
+    padding:  50px 20%; 
+}
+
+.rock,
+.paper,
+.scissors,
+.restart-buttton{
+    padding: 10px 20px;
+    cursor: pointer;
+    outline: none;
+    margin-right: 10px;
+    margin-bottom: 20px;
+}
+
+.results,
+.moves,
+.scors{
+    font-size: 16px;
+    line-height: 19px;
+    margin-bottom: 15px;
+    color: white
+}
+.restart-buttton{
+    background: rgb(156, 46, 46);
+    color: rgb(241, 204, 204);
+    font-weight: 600px;
+    border-radius: 4px;
+    border: none;
+}
+.restart-buttton:hover{
+    background: rgb(241, 204, 204);;
+    color: rgb(156, 46, 46);;
+}
+.results{
+    font-si
+}

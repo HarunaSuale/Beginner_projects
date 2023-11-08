@@ -18,7 +18,8 @@
 
         <script>
 
-            const todoArray = [];
+            const todoArray = JSON.parse(localStorage.getItem('Array'))||[];
+            
 
              function getTodo(){
                  const inputElement = document.querySelector('.js-inputText');
@@ -61,6 +62,8 @@
                     setTimeout(() => {getTodo();}, 500);
 
                 });
+
+                localStorage.setItem('Array', JSON.stringify(todoArray));
                
             
                 

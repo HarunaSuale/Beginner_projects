@@ -1,0 +1,44 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: arial;
+}
+
+body{
+    background: #222;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+.weather-page{
+    width: 90%;
+    max-width: 470px;
+   
+    background: linear-gradient(135deg, #00feba, #5b5484);
+    color:#fff;
+    margin: 100px auto 0;
+    text-align: center;
+    
+}
+.search-input{
+    display: flex;
+    justify-content: space-between;
+    
+
+}
+.search-input input{
+    padding: 20px;
+    border: none;
+    outline: none;
+    border-radius: 30px;
+    font-size: 10px;
+    flex: 1;
+}
+.search-input img{
+    width: 40px;
+    background: transparent;
+    border: none;
+    border-radius: 50%;
+
+}

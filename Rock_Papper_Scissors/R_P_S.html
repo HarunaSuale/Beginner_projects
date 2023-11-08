@@ -2,8 +2,156 @@
 <html lang="en">
     <head>
         <title>Rock paper Scissors</title>
+        <link rel="stylesheet" href="R_P_S.css">
     </head>
     <body>
+        <div class="container">
+            <div>
 
-    </body>      
+                <button class="js-rock rock">Rock</button>
+                <button class="js-paper paper">Paper</button>
+                <button class="js-scissors scissors">Scissors</button>
+    
+            </div>
+            <div>
+
+                <p class="js-results results"></p>
+                <p class="js-moves moves"></p>
+                <p class="js-score scors"></p>
+    
+            </div>
+
+            <button class="js-clear-score restart-buttton">Restart Game</button>
+            <p class="js-number "></p>
+
+        </div>
+
+    </body>
+
+
+    <script>
+
+        const score = JSON.parse(localStorage.getItem('score')) || {
+            Wins: 0,
+            Ties: 0,
+            Loses: 0
+        };
+        let numberOfPlay = '';
+              
+     
+        function compuerChoice(){
+            let randomNumber = Math.random();
+           let computerMove = '';
+            if (randomNumber > 0 && randomNumber <= 0.3){
+                computerMover = 'Rock';
+            }else if(randomNumber > 0.3 && randomNumber <= 0.6){
+                computerMove = 'Paper';
+            }else if(randomNumber > 0.6 && randomNumber < 1){
+                computerMove = 'Scissors';
+            }
+
+            return computerMove;
+
+        }
+
+        
+        let results = '';
+        function gameResults(playerMove){
+           
+            let computerMove = compuerChoice();
+
+            if(playerMove === 'Rock'){
+                if(computerMove === 'Rock'){
+                    results = 'You Tie!';
+                }else if(computerMove === 'Paper'){
+                    results = 'You Lose!';
+                }else if(computerMove === 'Scissors'){
+                    results = 'You Win!';
+                }
+            }else if(playerMove === 'Paper'){
+                if(computerMove === 'Rock'){
+                    results = 'You Win!';
+                }else if(computerMove === 'Paper'){
+                    results = 'You Tie!';
+                }else if(computerMove === 'Scissors'){
+                    results = 'You Lose!';
+                }
+
+            }else if(playerMove === 'Scissors'){
+                if(computerMove === 'Rock'){
+                    results = 'You Lose!';
+                }else if(computerMove === 'Paper'){
+                    results = 'You Win!';
+                }else if(computerMove === 'Scissors'){
+                    results = 'You Tie!';
+                }
+
+            }
+          
+            if(results === 'You Win!'){
+                score.Wins += 1;
+            }else if(results === 'You Tie!'){
+                score.Ties += 1;
+            }else if(results === 'You Lose!'){
+                score.Loses += 1;
+            }
+            display();
+            numberOfPlay = (score.Wins + score.Ties + score.Loses);
+
+           
+           
+
+            localStorage.setItem('score', JSON.stringify(score));
+            document.querySelector('.js-moves').innerHTML = `You picked ${playerMove} - computer chose ${computerMove }`;
+            
+           }
+
+         
+           const clearElement = document.querySelector('.js-clear-score');
+           clearElement.addEventListener('click', () => {
+            localStorage.removeItem('score');
+            score.Wins = 0;
+            score.Loses = 0;
+            score.Ties = 0;
+            numberOfPlay = (score.Wins + score.Ties + score.Loses);
+            display();
+
+           });
+
+
+           function display(){
+            document.querySelector('.js-score').innerHTML = `Wins: ${score.Wins}, Loses: ${score.Loses}, Ties: ${score.Ties}`;
+            if(score.Wins || score.Ties || score.Loses >= 3){  
+                 document.querySelector('.js-results').innerHTML = results;
+            }else{
+                document.querySelector('.js-results').innerHTML = `Make a move`;
+            }            
+            document.querySelector('.js-number').innerHTML = `You have played ${numberOfPlay} times!`;
+
+
+           }
+
+
+
+           const paperElement = document.querySelector('.js-paper');
+            paperElement.addEventListener('click', () => {
+                gameResults('Paper');
+           });
+
+           const rockElement = document.querySelector('.js-rock');
+            rockElement.addEventListener('click', () => {
+                gameResults('Rock');
+           });
+
+           const scissorsElement = document.querySelector('.js-scissors');
+            scissorsElement.addEventListener('click', () => {
+                gameResults('Scissors');
+           });
+
+       
+            
+            
+        
+      
+    </script>      
 </html>

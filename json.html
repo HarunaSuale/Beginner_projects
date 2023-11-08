@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Local Storage</title>
+        <style>
+            .container{
+                width: 100%;
+                height: 100vh;
+                margin-top: 20px;
+            }
+            h1{
+                text-align: center;
+            }
+            .ino{
+                width: 25%;
+                margin-left: 240px;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1 id="output"> hello</h1>
+            <input id="input" placeholder="Type in something" class="ino"/>
+            <button onclick="Save();">Save</button>
+            <button onclick="View();">View</button>
+        </div>
+
+        <script>
+
+            function Save(){
+                //Get data from input box
+
+                const new_data = document.getElementById('input').value;
+
+                //if there is nothing save at the start then save an empty array
+                if(localStorage.getItem('data') === null){
+                    localStorage.setItem('data', '[]');
+                }
+
+                //Get old data and stab it to the new data
+                const old_data = JSON.parse(localStorage.getItem('data'));
+                old_data.push(new_data);
+
+                //Save the old in new data to local storage
+                localStorage.setItem('data', JSON.stringify(old_data));
+
+            }
+
+
+
+
+
+            function View(){
+                //if there is data then display it
+
+                if(localStorage.getItem('data') != null){
+                    document.getElementById('output').innerHTML = JSON.parse(localStorage.getItem('data'));
+                }
+            }
+
+
+
+        </script>
+    </body>
+</html>
