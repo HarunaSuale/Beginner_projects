@@ -1,5 +1,5 @@
 import {products} from '../data/products.js';
-import {cart, addToCart} from '../data/cart.js';
+import {cart, addToCart,} from '../data/cart.js';
 
 
 
@@ -80,8 +80,7 @@ addElement.forEach((button) =>{
     button.addEventListener('click', () =>{
         const productId = button.dataset.productId;
         addToCart(productId);
-        totalCartQuantity();
-    
+        totalCartQuantity();   
         
      });
 })
