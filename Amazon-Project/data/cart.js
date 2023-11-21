@@ -30,7 +30,7 @@ export function addToCart(productId){
         cart.push({
             id: productId,
             quantity: 1,
-            deliveryOptionsId: '1'
+            deliveryOptionsId:''
         })
     }
     saveToLocalStorage();
@@ -54,6 +54,10 @@ export function deleteFromCart(productId){
 export function saveToLocalStorage(){
     localStorage.setItem('cart', JSON.stringify(cart));
 }
+
+
+
+
 
 
 
