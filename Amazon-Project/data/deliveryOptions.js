@@ -1,5 +1,4 @@
 
-
 export const deliveryOptions = [{
     id: '1',
     deliveryDate: 7,

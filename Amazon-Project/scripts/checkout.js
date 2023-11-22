@@ -2,8 +2,12 @@ import {cart,deleteFromCart, saveToLocalStorage} from '../data/cart.js';
 import {products} from '../data/products.js';
 import {deliveryOptions} from '../data/deliveryOptions.js'
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
+import {centsConvertor} from './utils/money.js';
+import {renderPayment} from './checkoutPage/paymentSummary.js';
+
 
 renderPaymentSummary();
+renderPayment();
 function renderPaymentSummary(){
 let checkoutHTML= '';
 cart.forEach((cartItem) =>{
@@ -13,16 +17,17 @@ cart.forEach((cartItem) =>{
             matchingItem = product;
         }
     })
+
     let deliveryOption;
+
     const DeliveryOptionId = cartItem.deliveryOptionsId;
     deliveryOptions.forEach((option) =>{
-      if (DeliveryOptionId === option.id){
-        deliveryOption = option;
-      }
+      if (DeliveryOptionId === option.id)
+         deliveryOption = option;
     })
     const today = dayjs();
-      const deliveryDate = today.add(deliveryOption.deliveryDate, 'day');
-      const dateString = deliveryDate.format('dddd, MMMM D');
+      const deliveryDay = today.add(deliveryOption.deliveryDate, 'day');
+      const dateString = deliveryDay.format('dddd, MMMM D');
      
     checkoutHTML +=`<div class="cart-item-container js-remove-element-${matchingItem.id}">
     <div class="delivery-date">
@@ -37,7 +42,7 @@ cart.forEach((cartItem) =>{
         ${matchingItem.name}
         </div>
         <div class="product-price">
-          $${matchingItem.priceCents/100}
+          $${centsConvertor(matchingItem.priceCents)}
         </div>
         <div class="product-quantity">
           <span>
@@ -73,11 +78,11 @@ function deliveryOptionsHtml(matchingItem, cartItem){
       const deliveryDate = today.add(item.deliveryDate, 'day');
       const dateString = deliveryDate.format('dddd, MMMM D');
 
-      const shippingPrice = item.priceCents ===   0    
+      const shippingPrice = item.priceCents ===  0    
       ? 'FREE'
-      : `$${(item.priceCents)/100}-`
+      : `$${centsConvertor(item.priceCents)}-`
       
-        const isChecked = item.id === cartItem.deliveryOptionsId;    
+      const isChecked = item.id === cartItem.deliveryOptionsId;    
       
       html += ` <div class="delivery-option js-deliveryOptions"
       data-product-id="${matchingItem.id}"
@@ -119,7 +124,6 @@ deleteElements.forEach((value) =>{
   })
   matchingItem.deliveryOptionsId = deliveryOptionId;
   saveToLocalStorage();
-  renderPaymentSummary();
 }
 
 
@@ -129,6 +133,7 @@ document.querySelectorAll('.js-deliveryOptions')
       const {productId, deliveryOptionId} = option.dataset;
      UpdateCartDeliveryOption(productId, deliveryOptionId);
      renderPaymentSummary();
+     saveToLocalStorage();
     })
   })
 
