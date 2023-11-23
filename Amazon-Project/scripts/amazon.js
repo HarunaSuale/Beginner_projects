@@ -1,5 +1,5 @@
 import {products} from '../data/products.js';
-import {cart, addToCart,} from '../data/cart.js';
+import {cart, addToCart, totalCartQuantity} from '../data/cart.js';
 
 
 
@@ -57,33 +57,28 @@ products.forEach((product) =>{
    </div>`;
 
 })
-
 document.querySelector('.js-product-grid').innerHTML = productsHTML;
-}
-renterAmazon();
 
 
+  
  
-   function totalCartQuantity(){
-        let cartQuantity = 0;
-        cart.forEach((item) =>{
-            cartQuantity += item.quantity;
-        });      
-       document.querySelector('.js-cartQuantity').innerHTML = cartQuantity;
-   }
- 
-
-
-
 const addElement = document.querySelectorAll('.js-add-button');
 addElement.forEach((button) =>{
     button.addEventListener('click', () =>{
         const productId = button.dataset.productId;
-        addToCart(productId);
-        totalCartQuantity();   
-        
+        addToCart(productId); 
+        renterAmazon(); 
+        totalCartQuantity();  
+             
      });
 })
+}
+
+
+
+renterAmazon();
+totalCartQuantity(); 
+
 
 
 

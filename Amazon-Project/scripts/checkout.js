@@ -103,7 +103,7 @@ deleteElements.forEach((value) =>{
     const productId = value.dataset.productId;
     deleteFromCart(productId);
     document.querySelector(`.js-remove-element-${productId}`).remove();
-    saveToLocalStorage();
+    saveToLocalStorage(cart);
   })
 })
 
@@ -116,7 +116,7 @@ deleteElements.forEach((value) =>{
       }
   })
   matchingItem.deliveryOptionsId = deliveryOptionId;
-  saveToLocalStorage();
+  saveToLocalStorage(cart);
 }
 
 
