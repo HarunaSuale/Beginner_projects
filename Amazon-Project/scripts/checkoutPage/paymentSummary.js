@@ -1,59 +1,58 @@
-import {cart} from '../../data/cart.js';
-import {deliveryOptions} from '../../data/deliveryOptions.js';
-//import {centsConvertor} from './utils/money.js';
+import {cart, matchingDeliveryOption} from '../../data/cart.js';
+import {matchingProduct} from '../../data/products.js';
+import {centsConvertor} from '../utils/money.js';
+
+
 
 export function renderPayment(){
-    let orderCost = 0;
+    let itemsCost = 0;
     let shippingCost = 0;
 
-    cart.forEach((product) =>{
-        orderCost += product.priceCents * product.quantity;
-
-        const deliveryOptionId = product.deliveryOptionsId;
-
-        deliveryOptions.forEach((option) =>{
-            if(option.id == deliveryOptionId){
-                shippingCost += deliveryOptions.priceCents;
-            }
-        })
-    });
-    const total = orderCost+shippingCost;
-    const Totaltax = 0.1*(orderCost+shippingCost);
-    const orderTotal = total-Totaltax;
+    cart.forEach((item) =>{
+        const matchingItem = matchingProduct(item);
+        itemsCost += matchingItem.priceCents * item.quantity;
+        const matchingOption = matchingDeliveryOption(item);
+        shippingCost += matchingOption.priceCents ;
+    })
+    const totalB4Tax = itemsCost + shippingCost;
+    const taxCost = 0.1*totalB4Tax;
+    const orderTotal = totalB4Tax - taxCost;
 
     let paymentHTML = '';
-    paymentHTML += `      <div class="payment-summary-title">
-    Order Summary
-    </div>
+    paymentHTML += `<div class="payment-summary-title">
+        Order Summary
+        </div>
 
-    <div class="payment-summary-row">
-    <div>Items (3):</div>
-    <div class="payment-summary-money">$${orderCost}</div>
-    </div>
+        <div class="payment-summary-row">
+            <div>Items (3):</div>
+            <div class="payment-summary-money">$${centsConvertor(itemsCost)}</div>
+        </div>
 
-    <div class="payment-summary-row">
-    <div>Shipping &amp; handling:</div>
-    <div class="payment-summary-money">$${shippingCost}</div>
-    </div>
+        <div class="payment-summary-row">
+            <div>Shipping &amp; handling:</div>
+            <div class="payment-summary-money">$${centsConvertor(shippingCost)}</div>
+        </div>
 
-    <div class="payment-summary-row subtotal-row">
-    <div>Total before tax:</div>
-    <div class="payment-summary-money">$${total}</div>
-    </div>
+        <div class="payment-summary-row subtotal-row">
+            <div>Total before tax:</div>
+            <div class="payment-summary-money">$${centsConvertor(totalB4Tax)}</div>
+        </div>
 
-    <div class="payment-summary-row">
-    <div>Estimated tax (10%):</div>
-    <div class="payment-summary-money">$${Totaltax}</div>
-    </div>
+        <div class="payment-summary-row">
+            <div>Estimated tax (10%):</div>
+            <div class="payment-summary-money">$${centsConvertor(taxCost)}</div>
+        </div>
 
-    <div class="payment-summary-row total-row">
-    <div>Order total:</div>
-    <div class="payment-summary-money">$${orderTotal}</div>
-    </div>
+        <div class="payment-summary-row total-row">
+            <div>Order total:</div>
+            <div class="payment-summary-money">$${centsConvertor(orderTotal)}</div>
+        </div>
 
-    <button class="place-order-button button-primary">
-    Place your order
-    </button>`;
+        <button class="place-order-button button-primary">
+            Place your order
+        </button>`;
+  
+        document.querySelector('.js-order-summary').innerHTML = paymentHTML;
 
-    document.querySelector('.js-order-summary').innerHTML = paymentHTML;
+            
 }

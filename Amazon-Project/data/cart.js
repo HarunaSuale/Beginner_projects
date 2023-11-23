@@ -1,3 +1,4 @@
+import {deliveryOptions} from './deliveryOptions.js';
 export let cart = JSON.parse(localStorage.getItem('cart'));
 
 if(!cart){
@@ -30,7 +31,7 @@ export function addToCart(productId){
         cart.push({
             id: productId,
             quantity: 1,
-            deliveryOptionsId:''
+            deliveryOptionsId:'1'
         })
     }
     saveToLocalStorage();
@@ -53,6 +54,16 @@ export function deleteFromCart(productId){
 
 export function saveToLocalStorage(){
     localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+ export function  matchingDeliveryOption(item){
+    let matchingOption;
+    deliveryOptions.forEach((option) =>{
+        if(item.deliveryOptionsId === option.id){
+            matchingOption = option;
+        }
+    })
+    return matchingOption;
 }
 
 

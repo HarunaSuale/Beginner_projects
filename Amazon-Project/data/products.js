@@ -658,3 +658,14 @@ export const products = [
     ]
   }
 ];
+
+
+export function matchingProduct(cartItem){
+  let  matchingItem;
+  products.forEach((product) =>{
+      if(product.id === cartItem.id){
+          matchingItem = product;
+      }
+  })
+   return matchingItem;
+}

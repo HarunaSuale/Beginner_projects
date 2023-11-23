@@ -1,25 +1,18 @@
 import {cart,deleteFromCart, saveToLocalStorage} from '../data/cart.js';
-import {products} from '../data/products.js';
+import {products, matchingProduct} from '../data/products.js';
 import {deliveryOptions} from '../data/deliveryOptions.js'
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import {centsConvertor} from './utils/money.js';
 import {renderPayment} from './checkoutPage/paymentSummary.js';
 
 
-renderPaymentSummary();
 renderPayment();
 function renderPaymentSummary(){
 let checkoutHTML= '';
 cart.forEach((cartItem) =>{
-    let  matchingItem;
-    products.forEach((product) =>{
-        if(product.id === cartItem.id){
-            matchingItem = product;
-        }
-    })
+    const matchingItem = matchingProduct(cartItem)
 
     let deliveryOption;
-
     const DeliveryOptionId = cartItem.deliveryOptionsId;
     deliveryOptions.forEach((option) =>{
       if (DeliveryOptionId === option.id)
@@ -68,7 +61,7 @@ cart.forEach((cartItem) =>{
  
 })
 document.querySelector('.js-checkout-grid').innerHTML = checkoutHTML;
-}
+
 
 
 function deliveryOptionsHtml(matchingItem, cartItem){
@@ -133,9 +126,11 @@ document.querySelectorAll('.js-deliveryOptions')
       const {productId, deliveryOptionId} = option.dataset;
      UpdateCartDeliveryOption(productId, deliveryOptionId);
      renderPaymentSummary();
-     saveToLocalStorage();
+     renderPayment();
     })
   })
+}
+renderPaymentSummary();
 
 
 
